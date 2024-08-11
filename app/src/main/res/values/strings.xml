@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">SuitMedia Test</string>
+    <string name="text_input_name">Name</string>
+    <string name="text_input_palindrome">Palindrome</string>
+    <string name="text_palindrome">CHECK</string>
+    <string name="text_next">NEXT</string>
+    <string name="desc_img_profile">Image_first_page</string>
+    <string name="text_choose_user">Choose a User</string>
+    <string name="text_appbar_title">App Bar</string>
+    <string name="desc_back_btn">Image_button_back</string>
+    <string name="text_welcome">Welcome</string>
+    <string name="text_name">Arkan Mahardika</string>
+    <string name="text_user_name">Selected User Name</string>
+    <string name="text_second_screen">Second Screen</string>
+    <string name="text_third_screen">Third Screen</string>
+    <string name="text_name_default">User</string>
 </resources>

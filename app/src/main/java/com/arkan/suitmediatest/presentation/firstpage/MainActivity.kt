@@ -1,21 +1,55 @@
 package com.arkan.suitmediatest.presentation.firstpage
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.arkan.suitmediatest.R
+import com.arkan.suitmediatest.databinding.ActivityMainBinding
+import com.arkan.suitmediatest.presentation.secondpage.SecondActivity
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
+    private val binding: ActivityMainBinding by lazy {
+        ActivityMainBinding.inflate(layoutInflater)
+    }
+    private val viewModel: MainViewModel by viewModel()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        setContentView(binding.root)
+        setClickListener()
+        palindromeObserver()
+    }
+
+    private fun setClickListener() {
+        binding.btnNext.setOnClickListener {
+            navigateToSecondPage()
         }
+        binding.btnPalindrome.setOnClickListener {
+            checkPalindrome()
+        }
+    }
+
+    private fun navigateToSecondPage() {
+        val name = binding.tiEtName.text.toString()
+        SecondActivity.startActivity(this, name)
+    }
+
+    private fun palindromeObserver() {
+        viewModel.isPalindrome.observe(this) { isPalindrome ->
+            val message =
+                if (isPalindrome) {
+                    "isPalindrome"
+                } else {
+                    "not palindrome"
+                }
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun checkPalindrome() {
+        val textPalindrome = binding.tiEtPalindrome.text.toString()
+        viewModel.checkPalindrome(textPalindrome)
     }
 }
